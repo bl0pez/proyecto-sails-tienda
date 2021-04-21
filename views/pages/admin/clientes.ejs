@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-md-12">
+  
+  
+      <% flash.get('mensaje').forEach(function (msg) { %>
+      <div class="alert alert-success" role="alert">
+        <%=msg%>
+      </div>
+      <% }) %>
+  
+      <h2><%=titulo%></h2>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Email</th>
+            <th scope="col">activa</th>
+            <th scope="col">acción</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% clientes.forEach( cliente => { %>
+          <tr>
+            <th scope="row"><%=cliente.id%></th>
+            <td><%=cliente.nombre%></td>
+            <td><%=cliente.email%></td>
+            <td><%=cliente.activa ? "true" : "false"%></td>
+            <td>
+              <% if (cliente.activa) { %>
+              <a href="/admin/desactivar-cliente/<%=cliente.id%>" class="btn btn-info">Desactivar cliente</a>
+              <% } else { %>
+              <a href="/admin/activar-cliente/<%=cliente.id%>" class="btn btn-primary">Activar cliente</a>
+              <% } %>
+            </td>
+          </tr>
+        <% }) %>
+        </tbody>
+      </table>
+
+      <form action="/admin/cliente" method="post">
+        <div class="row">
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Nombre" id="nombre" name="nombre" required>
+          </div>
+          <div class="col">
+            <input type="email" class="form-control" placeholder="Email" id="email" name="email" required>
+          </div>
+          <div class="col">
+            <input type="password" class="form-control" placeholder="Contraseña" id="contrasena" name="contrasena" required>
+          </div>
+          <div class="col">
+            <button type="submit" class="btn btn-primary">Crear Usuario</button>
+          </div>
+        </div>
+      </form>
+  
+    </div>
+  
+  </div>

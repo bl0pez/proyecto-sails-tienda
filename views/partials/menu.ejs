@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand navbar-dark bg-primary">
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item active">
+      <a class="nav-link" href="/">Inicio</a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="/acerca-de">Acerca de</a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="/top-vendidas">Top Vendidas</a>
+    </li>
+  </ul>
+  <ul class="navbar-nav mr-2">
+
+    <% if (session && session.cliente) { %>
+    <li class="nav-item my-auto">
+      <span class="px-2 text-white">
+        <%=session.cliente.nombre%></span>
+    </li>
+    <li class="nav-item">
+      <a class="btn btn-light mx-2" href="/mis-ordenes">Mis órdenes</a>
+    </li>
+    <li class="nav-item">
+      <a class="btn btn-light mx-2" href="/lista-deseo"><i class="fas fa-list-ul"></i></a>
+    </li>
+    <li class="nav-item">
+      <a class="btn btn-light mx-2" href="/carro-de-compra"><i class="fas fa-cart-plus"></i><span class="badge">
+          <%=(session.carroCompra) ? session.carroCompra.length : 0%></span></a>
+    </li>
+    <li class="nav-item">
+      <a class="btn btn-light mx-2" href="/cerrar-sesion">Cerrar Sesión</a>
+    </li>
+
+
+    <% } else if (session && session.admin) { %>
+    <li class="nav-item my-auto">
+      <span class="px-2 text-white">
+        <strong>ADMIN:</strong></span>
+    </li>
+
+    <div class="dropdown">
+      <a class="btn btn-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <%=session.admin.nombre%>
+      </a>
+    
+      <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="/admin/principal"><i class="fas fa-cart-plus"></i> Inicio</a>
+        <a class="dropdown-item" href="/admin/admins"><i class="fas fa-users-cog"></i> Admins</a>
+        <a class="dropdown-item" href="/admin/clientes"><i class="fas fa-users"></i> Clientes</a>
+        <a class="dropdown-item" href="/admin/dashboard/"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/admin/cerrar-sesion"><i class="fas fa-sign-out-alt"></i> cerrar sesion</a>
+      </div>
+    </div>
+    <% } else { %>
+    <li class="nav-item">
+      <a class="btn btn-light" href="/registro">Registro</a>
+    </li>
+    <li class="nav-item">
+      <a class="btn btn-light mx-2" href="/inicio-sesion">Inicio de Sesión</a>
+    </li>
+    <% } %>
+  </ul>
+</nav>
